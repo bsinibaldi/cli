@@ -279,7 +279,6 @@ const connectComponentConfigFile = async (
         const remainingLinks = component.urlPaths?.filter(({ type }) => type !== LinkType.storybook) || [];
         // if we have multiple stories, we assume that each zeplin name corresponds to a single story
         if (storyLinks.length > 1) {
-            global.console.log(storyLinks.length);
             storyLinks.forEach((storyLink, index) => {
                 if (component.zeplinNames && component.zeplinNames[index]) {
                     finalConnectedComponents.push({
@@ -287,8 +286,16 @@ const connectComponentConfigFile = async (
                         zeplinNames: [component.zeplinNames[index]],
                         urlPaths: [storyLink, ...remainingLinks]
                     });
+                } else if (component.zeplinIds && component.zeplinIds[index]) {
+                    finalConnectedComponents.push({
+                        ...component,
+                        zeplinIds: [component.zeplinIds[index]],
+                        urlPaths: [storyLink, ...remainingLinks]
+                    });
                 }
             });
+        } else {
+            finalConnectedComponents.push(component);
         }
     });
 
