@@ -283,13 +283,13 @@ const connectComponentConfigFile = async (
                 if (component.zeplinNames && component.zeplinNames[index]) {
                     finalConnectedComponents.push({
                         ...component,
-                        zeplinNames: [component.zeplinNames![index]],
+                        zeplinNames: [component.zeplinNames[index]],
                         urlPaths: [storyLink, ...remainingLinks]
-                    })
+                    });
                 }
             });
         }
-    })
+    });
 
     return {
         projects: componentConfigFile.projects || [],
