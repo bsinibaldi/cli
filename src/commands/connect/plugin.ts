@@ -280,14 +280,14 @@ const connectComponentConfigFile = async (
         // if we have multiple stories, we assume that each zeplin name corresponds to a single story
         if (storyLinks.length > 1) {
             storyLinks.forEach((storyLink, index) => {
-                if (component.zeplinNames?[index]) {
+                if (component.zeplinNames && component.zeplinNames[index]) {
                     finalConnectedComponents.push({
                         ...component,
-                        zeplinNames: [component.zeplinNames?[index]],
+                        zeplinNames: [component.zeplinNames![index]],
                         urlPaths: [storyLink, ...remainingLinks]
                     })
                 }
-            })
+            });
         }
     })
 
